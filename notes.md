@@ -1,0 +1,2 @@
+# Printk
+dmesg
