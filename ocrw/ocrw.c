@@ -88,11 +88,11 @@ static ssize_t device_read(
 {
         // Nothing left to read
         if (*offset >= sizeof(virtual_device.data))
-        		return 0;
+                return 0;
 
         // Read more than possible
-		if (*offset + length > sizeof(virtual_device.data))
-        		length = sizeof(virtual_device.data) - *offset;
+        if (*offset + length > sizeof(virtual_device.data))
+                length = sizeof(virtual_device.data) - *offset;
 
         ret = copy_to_user(buffer, virtual_device.data + *offset, length);
         printk(KERN_INFO "ocrw: Reading from device.");
@@ -107,11 +107,11 @@ static ssize_t device_write(
 {
         // Nothing left to write
         if (*offset >= sizeof(virtual_device.data))
-        		return 0;
+                return 0;
 
         // Write more than possible
-		if(*offset + length > sizeof(virtual_device.data))
-        		length = sizeof(virtual_device.data) - *offset;
+        if(*offset + length > sizeof(virtual_device.data))
+                length = sizeof(virtual_device.data) - *offset;
 
         ret = copy_from_user(virtual_device.data, buffer, length);
         printk(KERN_INFO "ocrw: Writing to device.\n");
