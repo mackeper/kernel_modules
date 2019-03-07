@@ -33,14 +33,14 @@ int __init init_mod(void)
         if ((ret = cdev_add(&c_dev, dev, MINOR_COUNT)) < 0)
                 return ret;
 
-        //?
+        // Create a class struct
         if (IS_ERR(c1 = class_create(THIS_MODULE, "char"))) {
                 cdev_del(&c_dev);
                 unregister_chrdev_region(dev, MINOR_COUNT);
                 return PTR_ERR(c1);
         }
 
-        //?
+        // Creates a device and registers it with sysfs, A "dev" file will be created.
         if (IS_ERR(dev_ret = device_create(c1, NULL, dev, NULL, DEVICE_NAME))) {
                 class_destroy(c1);
                 cdev_del(&c_dev);
